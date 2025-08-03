@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<title>{title || 'Liang Works - WebGL技術作品集'}</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYVC6V7Q5H"></script>
+<script type="module">
+  // Google Analytics初期化
+  window.dataLayer = window.dataLayer || [];
+  function gtagFunction() {
+    window.dataLayer.push(arguments);
+  }
+  window.gtag = gtagFunction;
+  gtagFunction('js', new Date());
+  gtagFunction('config', 'G-ZYVC6V7Q5H');
+</script>
+
+<!-- パフォーマンス最適化：DNS prefetch -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<slot name="head" />
+</head>
+<body class="m-0 p-0">
+<slot />
+</body>
+</html>

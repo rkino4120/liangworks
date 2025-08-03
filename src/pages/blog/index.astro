@@ -1,0 +1,28 @@
+---
+import Blog from '../../components/blog.svelte';
+import Layout from '../../layouts/Layout.astro';
+import { getBlogPosts, type BlogListResponse } from '../../lib/microcms';
+
+// サーバーサイドでデータを取得
+let initialData: BlogListResponse | null = null;
+let error: string | null = null;
+
+try {
+  initialData = await getBlogPosts({
+    limit: 10,
+    offset: 0,
+    orders: '-publishedAt',
+  });
+} catch (err: unknown) {
+  console.error('ブログ記事の取得に失敗しました:', err);
+  error = 'ブログ記事の取得に失敗しました。';
+}
+---
+
+<Layout title="Webと3D表現 実験ブログ - Liang Works">
+	<Blog 
+    client:only="svelte" 
+    initialData={initialData}
+    initialError={error}
+  />
+</Layout>
